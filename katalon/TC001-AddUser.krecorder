@@ -1,0 +1,1419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<title>feature1</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-001 - [ECP] Create user with valid required fields</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_valid</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_valid@gmail</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option><option>Changes saved</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-002 - [ECP] Username is empty</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td></td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_002@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyElementPresent</td><td>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]<datalist><option>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-003 - [ECP] Username contains uppercase letters</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>TestUser01</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_003@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyElementPresent</td><td>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]<datalist><option>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-004 - [ECP] Username contains whitespace</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>test user</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_004@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyElementPresent</td><td>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]<datalist><option>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-005 - [ECP] Username contains unsupported special character</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>test#user</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_005@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyElementPresent</td><td>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]<datalist><option>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-006 - [ECP] Username uses allowed special characters</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>test_user-01</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_006@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-007 - [ECP] Duplicate username</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>admin</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_007@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td>This username already exists, choose another<datalist><option>This username already exists, choose another</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-008 - [ECP] Password is empty with Manual accounts</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_008</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_008@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyElementPresent</td><td>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]<datalist><option>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-009 - [ECP] First name is empty</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_009</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_009@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyElementPresent</td><td>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]<datalist><option>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-010 - [ECP] Last name is empty</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_010</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_010@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyElementPresent</td><td>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]<datalist><option>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-011 - [ECP] Email is empty</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_011</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyElementPresent</td><td>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]<datalist><option>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-012 - [ECP] Email with Gmail domain</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_012</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_gmail@gmail</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-013 - [ECP] Email with Outlook domain</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_013</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_outlook@outlook</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-014 - [ECP] Email with Yahoo domain</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_014</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_yahoo@yahoo</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-015 - [ECP] Email has invalid format</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_015</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_invalid@</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyElementPresent</td><td>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]<datalist><option>css=.form-control-feedback.invalid-feedback, .invalid-feedback, [role="alert"]</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-016 - [ECP] MoodleNet profile ID is empty</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_016</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_016@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-017 - [ECP] Optional profile fields are empty</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_017</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_017@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-018 - [ECP] Duplicate ID number</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_018</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_018@gmail.com</td></tr>
+<tr><td>type</td><td>id_moodlenetprofile<datalist><option>id_idnumber</option><option>id_moodlenetprofile</option></datalist></td><td>DUPLICATE-ID-001</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-019 - [ECP] Phone accepts letters and symbols</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_019</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_019@gmail.com</td></tr>
+<tr><td>click</td><td>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]<datalist><option>id_phone1</option><option>css=#id_phone1</option><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_moodle_optionalcontainer.show<datalist><option>css=#id_moodle_optionalcontainer.show</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_phone1<datalist><option>id_phone1</option><option>css=#id_phone1</option></datalist></td><td>+84 (28)-ABC 123</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-020 - [ECP] Mobile phone accepts letters and symbols</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_020</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_020@gmail.com</td></tr>
+<tr><td>click</td><td>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]<datalist><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]</option><option>id_phone1</option><option>css=#id_phone1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_moodle_optionalcontainer.show<datalist><option>css=#id_moodle_optionalcontainer.show</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_phone2<datalist><option>id_phone2</option></datalist></td><td>+84-ABC 123</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-021 - [ECP] Interest tags multiple values</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_021</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_021@gmail.com</td></tr>
+<tr><td>click</td><td>css=a[data-bs-toggle="collapse"][href="#id_moodle_interestscontainer"]<datalist><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_interestscontainer"]</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_moodle_interestscontainer.show<datalist><option>css=#id_moodle_interestscontainer.show</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#fitem_id_interests input[role="textbox"]<datalist><option>css=#fitem_id_interests input[role="textbox"]</option></datalist></td><td>Programming</td></tr>
+<tr><td>sendKeys</td><td>css=#fitem_id_interests input[role="textbox"]<datalist><option>css=#fitem_id_interests input[role="textbox"]</option></datalist></td><td>${KEY_ENTER}</td></tr>
+<tr><td>type</td><td>css=#fitem_id_interests input[role="textbox"]<datalist><option>css=#fitem_id_interests input[role="textbox"]</option></datalist></td><td>Testing</td></tr>
+<tr><td>sendKeys</td><td>css=#fitem_id_interests input[role="textbox"]<datalist><option>css=#fitem_id_interests input[role="textbox"]</option></datalist></td><td>${KEY_ENTER}</td></tr>
+<tr><td>type</td><td>css=#fitem_id_interests input[role="textbox"]<datalist><option>css=#fitem_id_interests input[role="textbox"]</option></datalist></td><td>Databases</td></tr>
+<tr><td>sendKeys</td><td>css=#fitem_id_interests input[role="textbox"]<datalist><option>css=#fitem_id_interests input[role="textbox"]</option></datalist></td><td>${KEY_ENTER}</td></tr>
+<tr><td>type</td><td>css=#fitem_id_interests input[role="textbox"]<datalist><option>css=#fitem_id_interests input[role="textbox"]</option></datalist></td><td>AI</td></tr>
+<tr><td>sendKeys</td><td>css=#fitem_id_interests input[role="textbox"]<datalist><option>css=#fitem_id_interests input[role="textbox"]</option></datalist></td><td>${KEY_ENTER}</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-022 - [BVA] Phone length 0 (empty)</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_022</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_022@gmail.com</td></tr>
+<tr><td>click</td><td>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]<datalist><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]</option><option>id_phone1</option><option>css=#id_phone1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_moodle_optionalcontainer.show<datalist><option>css=#id_moodle_optionalcontainer.show</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_phone1<datalist><option>id_phone1</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-023 - [BVA] Phone length 1</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_023</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_023@gmail.com</td></tr>
+<tr><td>click</td><td>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]<datalist><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]</option><option>id_phone1</option><option>css=#id_phone1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_moodle_optionalcontainer.show<datalist><option>css=#id_moodle_optionalcontainer.show</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_phone1<datalist><option>id_phone1</option></datalist></td><td>1</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-024 - [BVA] Phone length 19</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_024</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_024@gmail.com</td></tr>
+<tr><td>click</td><td>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]<datalist><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]</option><option>id_phone1</option><option>css=#id_phone1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_moodle_optionalcontainer.show<datalist><option>css=#id_moodle_optionalcontainer.show</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_phone1<datalist><option>id_phone1</option></datalist></td><td>1111111111111111111</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-025 - [BVA] Phone length 20</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_025</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_025@gmail.com</td></tr>
+<tr><td>click</td><td>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]<datalist><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]</option><option>id_phone1</option><option>css=#id_phone1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_moodle_optionalcontainer.show<datalist><option>css=#id_moodle_optionalcontainer.show</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_phone1<datalist><option>id_phone1</option></datalist></td><td>11111111111111111111</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-026 - [BVA] Phone length 10</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_026</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_026@gmail.com</td></tr>
+<tr><td>click</td><td>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]<datalist><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]</option><option>id_phone1</option><option>css=#id_phone1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_moodle_optionalcontainer.show<datalist><option>css=#id_moodle_optionalcontainer.show</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_phone1<datalist><option>id_phone1</option></datalist></td><td>1111111111</td></tr>
+<tr><td>verifyValue</td><td>id_phone1<datalist><option>id_phone1</option></datalist></td><td>1111111111</td></tr>
+<tr><td>verifyElementPresent</td><td>css=.form-control-feedback.invalid-feedback<datalist><option>css=.form-control-feedback.invalid-feedback</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-027 - [BVA] Mobile phone length 0 (empty)</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_027</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_027@gmail.com</td></tr>
+<tr><td>click</td><td>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]<datalist><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]</option><option>id_phone1</option><option>css=#id_phone1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_moodle_optionalcontainer.show<datalist><option>css=#id_moodle_optionalcontainer.show</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_phone2<datalist><option>id_phone2</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-028 - [BVA] Mobile phone length 1</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_028</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_028@gmail.com</td></tr>
+<tr><td>click</td><td>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]<datalist><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]</option><option>id_phone1</option><option>css=#id_phone1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_moodle_optionalcontainer.show<datalist><option>css=#id_moodle_optionalcontainer.show</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_phone2<datalist><option>id_phone2</option></datalist></td><td>1</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-029 - [BVA] Mobile phone length 19</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_029</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>click</td><td>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]<datalist><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]</option><option>id_phone1</option><option>css=#id_phone1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_moodle_optionalcontainer.show<datalist><option>css=#id_moodle_optionalcontainer.show</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_phone2<datalist><option>id_phone2</option></datalist></td><td>1111111111111111111</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_029@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-030 - [BVA] Mobile phone length 20</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_030</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_030@gmail.com</td></tr>
+<tr><td>click</td><td>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]<datalist><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]</option><option>id_phone1</option><option>css=#id_phone1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_moodle_optionalcontainer.show<datalist><option>css=#id_moodle_optionalcontainer.show</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_phone2<datalist><option>id_phone2</option></datalist></td><td>11111111111111111111</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-031 - [BVA] Mobile phone length 18</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_031</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_031@gmail.com</td></tr>
+<tr><td>click</td><td>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]<datalist><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]</option><option>id_phone1</option><option>css=#id_phone1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_moodle_optionalcontainer.show<datalist><option>css=#id_moodle_optionalcontainer.show</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_phone2<datalist><option>id_phone2</option></datalist></td><td>111111111111111111</td></tr>
+<tr><td>verifyValue</td><td>id_phone2<datalist><option>id_phone2</option></datalist></td><td>111111111111111111</td></tr>
+<tr><td>verifyElementPresent</td><td>css=.form-control-feedback.invalid-feedback<datalist><option>css=.form-control-feedback.invalid-feedback</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-032 - [Decision] Authentication method = Manual accounts</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_032</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_032@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-033 - [Decision] Authentication method = Email-based self-registration</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_033</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Email-based self-registration</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_033@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-034 - [Decision] Authentication method = No login</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_034</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=No login</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_034@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-035 - [Decision] Disabled authentication method is unavailable</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td></td></tr>
+<tr><td>verifyElementPresent</td><td>css=#id_auth option<datalist><option>css=#id_auth option</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-036 - [Decision] Generate password and notify user checked</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_036</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_036@gmail.com</td></tr>
+<tr><td>check</td><td>id_createpassword<datalist><option>id_createpassword</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-037 - [Decision] Force password change checked</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_037</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_037@gmail.com</td></tr>
+<tr><td>check</td><td>id_preference_auth_forcepasswordchange<datalist><option>id_forcepasswordchange</option><option>id_preference_auth_forcepasswordchange</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-038 - [Decision] Suspended account checked</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_038</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_038@gmail.com</td></tr>
+<tr><td>check</td><td>id_suspended<datalist><option>id_suspended</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-039 - [Decision] Email visibility = Hidden</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_039</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_039@gmail.com</td></tr>
+<tr><td>select</td><td>id_maildisplay<datalist><option>id_maildisplay</option></datalist></td><td>label=Hidden</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-040 - [Decision] Email visibility = Visible to everyone</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_040</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_040@gmail.com</td></tr>
+<tr><td>select</td><td>id_maildisplay<datalist><option>id_maildisplay</option></datalist></td><td>label=Visible to everyone</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-041 - [Decision] Email visibility = Visible to course participants</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_041</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_041@gmail.com</td></tr>
+<tr><td>select</td><td>id_maildisplay<datalist><option>id_maildisplay</option></datalist></td><td>label=Visible to course participants</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-042 - [Decision] Preferred language default English</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_042</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_042@gmail.com</td></tr>
+<tr><td>verifySelectedValue</td><td>id_lang<datalist><option>id_lang</option></datalist></td><td>en</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-043 - [Use case] Create user with all required and optional data</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_043</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_043@gmail.com</td></tr>
+<tr><td>type</td><td>id_city<datalist><option>id_city</option></datalist></td><td>Ho Chi Minh City</td></tr>
+<tr><td>type</td><td>id_moodlenetprofile<datalist><option>id_moodlenetprofile</option></datalist></td><td>https://moodle.net/testprofile</td></tr>
+<tr><td>select</td><td>id_country<datalist><option>id_country</option></datalist></td><td>Viet Nam</td></tr>
+<tr><td>select</td><td>id_timezone<datalist><option>id_timezone</option></datalist></td><td>label=Asia/Ho_Chi_Minh</td></tr>
+<tr><td>click</td><td>css=a[data-bs-toggle="collapse"][href="#id_moodle_additional_namescontainer"]<datalist><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]</option><option>id_phone1</option><option>css=#id_phone1</option><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_additional_namescontainer"]</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_moodle_additional_namescontainer.show<datalist><option>css=#id_moodle_optionalcontainer.show</option><option>css=#id_moodle_additional_namescontainer.show</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_firstnamephonetic<datalist><option>id_firstnamephonetic</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastnamephonetic<datalist><option>id_lastnamephonetic</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_middlename<datalist><option>id_middlename</option></datalist></td><td>Middle</td></tr>
+<tr><td>type</td><td>id_alternatename<datalist><option>id_alternatename</option></datalist></td><td>Alternate</td></tr>
+<tr><td>click</td><td>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]<datalist><option>css=a[data-bs-toggle="collapse"][href="#id_moodle_optionalcontainer"]</option><option>id_phone1</option><option>css=#id_phone1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_moodle_optionalcontainer.show<datalist><option>css=#id_moodle_optionalcontainer.show</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_idnumber<datalist><option>id_idnumber</option></datalist></td><td>ID-043</td></tr>
+<tr><td>type</td><td>id_institution<datalist><option>id_institution</option></datalist></td><td>HCMUT</td></tr>
+<tr><td>type</td><td>id_department<datalist><option>id_department</option></datalist></td><td>Computer Science</td></tr>
+<tr><td>type</td><td>id_phone1<datalist><option>id_phone1</option></datalist></td><td>0123456789</td></tr>
+<tr><td>type</td><td>id_phone2<datalist><option>id_phone2</option></datalist></td><td>0987654321</td></tr>
+<tr><td>type</td><td>id_address<datalist><option>id_address</option></datalist></td><td>Ho Chi Minh City</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+<tr><td>type</td><td>id_imagealt<datalist><option>id_imagealt</option></datalist></td><td>Test profile picture</td></tr>
+<tr><td>runScript</td><td>]document.getElementById('id_descriptioneditable').innerHTML = 'Test user description';<datalist><option>document.querySelector('#id_description').value='Test user description';</option><option>document.querySelector('#id_description').value='Test user description'</option><option>id_descriptioneditable</option><option>]document.getElementById('id_descriptioneditable').innerHTML = 'Test user description';</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-044 - [Use case] Create user with only required fields</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_044</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_044@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-045 - [Use case] Cancel user creation</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_045</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_045@gmail.com</td></tr>
+<tr><td>click</td><td>id_cancel<datalist><option>id_cancel</option></datalist></td><td></td></tr>
+<tr><td>verifyElementPresent</td><td>css=table<datalist><option>css=table</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-046 - [Use case] Verify suspended account cannot log in</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_046</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_046@gmail.com</td></tr>
+<tr><td>check</td><td>id_suspended<datalist><option>id_suspended</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1500<datalist><option>1500</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td></td></tr>
+<tr><td>open</td><td>/login/logout.php<datalist><option>/login/logout.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=[role="alertdialog"] button.btn-primary<datalist><option>css=[role="alertdialog"] button.btn-primary</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=[role="alertdialog"] button.btn-primary<datalist><option>css=[role="alertdialog"] button.btn-primary</option></datalist></td><td></td></tr>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>tc001_046</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td>Invalid login<datalist><option>Invalid login</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-047 - [Use case] Verify No login account cannot log in</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_047</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=No login</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_047@gmail.com</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1500<datalist><option>1500</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option><option></option></datalist></td><td>Changes saved</td></tr>
+<tr><td>open</td><td>/login/logout.php<datalist><option>/login/logout.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=[role="alertdialog"] button.btn-primary<datalist><option>css=[role="alertdialog"] button.btn-primary</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=[role="alertdialog"] button.btn-primary<datalist><option>css=[role="alertdialog"] button.btn-primary</option></datalist></td><td></td></tr>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>tc001_047</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td>Invalid login<datalist><option>Invalid login</option></datalist></td><td></td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-048 - [Use case] Verify force password change on first login</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_048</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_048@gmail.com</td></tr>
+<tr><td>check</td><td>id_preference_auth_forcepasswordchange<datalist><option>id_preference_auth_forcepasswordchange</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1500<datalist><option>1500</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+<tr><td>open</td><td>/login/logout.php<datalist><option>/login/logout.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=[role="alertdialog"] button.btn-primary<datalist><option>css=[role="alertdialog"] button.btn-primary</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=[role="alertdialog"] button.btn-primary<datalist><option>css=[role="alertdialog"] button.btn-primary</option></datalist></td><td></td></tr>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>tc001_048</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>Change password</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-049 - [Use case] Upload valid profile picture</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_049</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_049@gmail.com</td></tr>
+<tr><td>waitForElementPresent</td><td>css=#id_imagefile_fieldset a[title="Add..."]<datalist><option>css=#id_imagefile_fieldset a[title="Add..."]</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#id_imagefile_fieldset a[title="Add..."]<datalist><option>css=#id_imagefile_fieldset a[title="Add..."]</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>xpath=//a[.//span[normalize-space()='Upload a file']]<datalist><option>xpath=//a[.//span[normalize-space()='Upload a file']]</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=input[type="file"][name="repo_upload_file"]<datalist><option>css=input[name="repo_upload_file"]</option><option>css=input[type="file"][name="repo_upload_file"]</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=input[type="file"][name="repo_upload_file"]<datalist><option>css=input[name="repo_upload_file"]</option><option>css=input[type="file"][name="repo_upload_file"]</option></datalist></td><td>C:\KatalonAssets\profile-valid.png</td></tr>
+<tr><td>click</td><td>css=button.fp-upload-btn<datalist><option>css=button.fp-upload-btn</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-050 - [Use case] Upload unsupported profile picture</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_050</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_050@gmail.com</td></tr>
+<tr><td>click</td><td>css=#id_imagefile_fieldset a[title="Add..."]<datalist><option>css=#id_imagefile_fieldset a[title="Add..."]</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>xpath=//a[.//span[normalize-space()='Upload a file']]<datalist><option>xpath=//a[.//span[normalize-space()='Upload a file']]</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=input[name="repo_upload_file"]<datalist><option>css=input[name="repo_upload_file"]</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=input[name="repo_upload_file"]<datalist><option>css=input[name="repo_upload_file"]</option></datalist></td><td>C:\KatalonAssets\unsupported.pdf</td></tr>
+<tr><td>click</td><td>css=button.fp-upload-btn<datalist><option>css=button.fp-upload-btn</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1000<datalist><option>1000</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>Invalid file type</option><option>No files attached</option></datalist></td><td>No files attached</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-051 - [Use case] Upload more than one picture</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_051</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_051@gmail.com</td></tr>
+<tr><td>click</td><td>css=#id_imagefile_fieldset a[title="Add..."]<datalist><option>css=#id_imagefile_fieldset a[title="Add..."]</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>xpath=//a[.//span[normalize-space()='Upload a file']]<datalist><option>xpath=//a[.//span[normalize-space()='Upload a file']]</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=input[name="repo_upload_file"]<datalist><option>css=input[name="repo_upload_file"]</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=input[name="repo_upload_file"]<datalist><option>css=input[name="repo_upload_file"]</option></datalist></td><td>C:\KatalonAssets\profile-valid.png</td></tr>
+<tr><td>click</td><td>css=button.fp-upload-btn<datalist><option>css=button.fp-upload-btn</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td>maximum number of files: 1<datalist><option>maximum number of files: 1</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>css=#id_imagefile_fieldset a[title="Add..."]<datalist><option>css=#id_imagefile_fieldset a[title="Add..."]</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>xpath=//a[.//span[normalize-space()='Upload a file']]<datalist><option>xpath=//a[.//span[normalize-space()='Upload a file']]</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=input[name="repo_upload_file"]<datalist><option>css=input[name="repo_upload_file"]</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=input[name="repo_upload_file"]<datalist><option>css=input[name="repo_upload_file"]</option></datalist></td><td>C:\KatalonAssets\profile-second.png</td></tr>
+<tr><td>click</td><td>css=button.fp-upload-btn<datalist><option>css=button.fp-upload-btn</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td>maximum number of files: 1<datalist><option>maximum number of files: 1</option></datalist></td><td></td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3" data-tags="">TC-001-052 - [Use case] Create user with all dropdown selections</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/login/index.php<datalist><option>/login/index.php</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>css=#username<datalist><option>css=#username</option></datalist></td><td>admin</td></tr>
+<tr><td>type</td><td>css=#password<datalist><option>css=#password</option></datalist></td><td>admin</td></tr>
+<tr><td>click</td><td>css=#loginbtn<datalist><option>css=#loginbtn</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>css=.navbar<datalist><option>css=.navbar</option></datalist></td><td>10000</td></tr>
+<tr><td>open</td><td>/user/editadvanced.php?id=-1<datalist><option>/user/editadvanced.php?id=-1</option></datalist></td><td></td></tr>
+<tr><td>waitForElementPresent</td><td>id_username<datalist><option>id_username</option></datalist></td><td>10000</td></tr>
+<tr><td>type</td><td>id_username<datalist><option>id_username</option></datalist></td><td>tc001_052</td></tr>
+<tr><td>select</td><td>id_auth<datalist><option>id_auth</option></datalist></td><td>label=Manual accounts</td></tr>
+<tr><td>waitForElementPresent</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>10000</td></tr>
+<tr><td>click</td><td>css=#fitem_id_newpassword [data-passwordunmask="edit"]<datalist><option>css=#fitem_id_newpassword [data-passwordunmask="edit"]</option></datalist></td><td></td></tr>
+<tr><td>type</td><td>id_newpassword<datalist><option>id_newpassword</option></datalist></td><td>ValidPass123!</td></tr>
+<tr><td>type</td><td>id_firstname<datalist><option>id_firstname</option></datalist></td><td>Test</td></tr>
+<tr><td>type</td><td>id_lastname<datalist><option>id_lastname</option></datalist></td><td>User</td></tr>
+<tr><td>type</td><td>id_email<datalist><option>id_email</option></datalist></td><td>tc001_052@gmail.com</td></tr>
+<tr><td>select</td><td>id_country<datalist><option>id_country</option></datalist></td><td>label=Vietnam</td></tr>
+<tr><td>select</td><td>id_timezone<datalist><option>id_timezone</option></datalist></td><td>label=Asia/Ho_Chi_Minh</td></tr>
+<tr><td>verifySelectedValue</td><td>id_lang<datalist><option>id_lang</option></datalist></td><td>en</td></tr>
+<tr><td>click</td><td>id_submitbutton<datalist><option>id_submitbutton</option></datalist></td><td></td></tr>
+<tr><td>pause</td><td>1200<datalist><option>1200</option></datalist></td><td></td></tr>
+<tr><td>verifyTextPresent</td><td><datalist><option>User created successfully</option></datalist></td><td>Changes saved</td></tr>
+</tbody></table>
+</body>
+</html>

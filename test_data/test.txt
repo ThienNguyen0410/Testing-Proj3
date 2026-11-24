@@ -1,0 +1,11 @@
+test_id,title,username,password,firstname,lastname,email,phone,mobile_phone,expected,expected_text
+TC-001-001,Create user with valid required fields,tc001_ddt_valid,ValidPass123!,Test,User,tc001_valid@example.com,,,success,Changes saved
+TC-001-002,Username is empty,,ValidPass123!,Test,User,tc001_empty_username@example.com,,,validation,
+TC-001-005,Username contains unsupported special character,test#user,ValidPass123!,Test,User,tc001_special_char@example.com,,,validation,
+TC-001-007,Duplicate username,admin,ValidPass123!,Test,User,tc001_duplicate@example.com,,,duplicate,"This username already exists, choose another"
+TC-001-008,Password is empty with Manual accounts,tc001_empty_password,,Test,User,tc001_empty_password@example.com,,,validation,
+TC-001-015,Email has invalid format,tc001_invalid_email,ValidPass123!,Test,User,invalid@,,,validation,
+TC-001-017,Optional profile fields are empty,tc001_optional_empty,ValidPass123!,Test,User,tc001_optional_empty@example.com,,,success,Changes saved
+TC-001-025,Phone length 20,tc001_phone_20,ValidPass123!,Test,User,tc001_phone20@example.com,11111111111111111111,,success,Changes saved
+TC-001-031,Mobile phone length 18 (recorder expects validation),tc001_mobile_18,ValidPass123!,Test,User,tc001_mobile18@example.com,,111111111111111111,validation,
+TC-001-045,Cancel user creation,tc001_cancel,ValidPass123!,Test,User,tc001_cancel@example.com,,,cancelled,
