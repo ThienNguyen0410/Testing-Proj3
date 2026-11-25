@@ -1,66 +1,143 @@
 import os
+import re
 import sys
+import unittest
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from utils.data_reader import read_test_data
+from utils.data_reader import EXPECTED_SLOTS, read_test_data
 
-from dotenv import load_dotenv
 
-load_dotenv(PROJECT_ROOT / ".env", override=True)
+def _load_environment_file(path):
+    if not path.is_file():
+        return
+
+    for line_number, raw_line in enumerate(
+        path.read_text(encoding="utf-8-sig").splitlines(), start=1
+    ):
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            line = line[len("export "):].strip()
+        key, separator, value = line.partition("=")
+        key = key.strip()
+        if not separator or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", key):
+            raise ValueError(f"{path}:{line_number}: invalid environment entry")
+        value = value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+            value = value[1:-1]
+        else:
+            value = value.split(" #", maxsplit=1)[0].rstrip()
+        os.environ[key] = value
+
+
+_load_environment_file(PROJECT_ROOT / ".env")
+
 
 def validate_data(data_path):
     rows = read_test_data(data_path)
     print(f"CSV OK: {len(rows)} test cases")
     for row in rows:
-        print(f"  {row['test_id']}: {row['title']}")
+        print(f"  {row['test_id']}: {row['title']} [{row['scenario']}]")
     return 0
 
 
-def _assert_case(page, driver, row, config):
+def _assert_expected(page, driver, row, config, stage):
     from selenium.webdriver.common.by import By
     from selenium.webdriver.support import expected_conditions as EC
-    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support.ui import Select, WebDriverWait
 
-    page.open_create_form(config["base_url"])
-    page.fill_form(row)
+    for result_column, check_column, target_column, stage_column in EXPECTED_SLOTS:
+        if row[stage_column] != stage:
+            continue
 
-    if row["expected"] == "cancelled":
-        page.cancel()
-        create_form_url = (
-            f"{config['base_url'].rstrip('/')}{config['urls']['create_user']}"
-        ).rstrip("/")
-        WebDriverWait(driver, page.timeout).until(
-            lambda browser: browser.current_url.rstrip("/") != create_form_url
-        )
-        WebDriverWait(driver, page.timeout).until(
-            EC.presence_of_element_located(
-                (By.CSS_SELECTOR, page.selectors["users_table"])
+        expected = row[result_column]
+        check = row[check_column]
+        target = row[target_column]
+        if check == "text":
+            WebDriverWait(driver, page.timeout).until(
+                lambda browser: expected
+                in browser.find_element(By.TAG_NAME, "body").text,
+                message=f"Expected page text was not found: {expected}",
             )
-        )
-        if row["username"] and row["username"] in driver.find_element(
-            By.TAG_NAME, "body"
-        ).text:
-            raise AssertionError("Cancelled username appears on the user list")
-        return "Cancel returned to the user list; username was not created"
+        elif check == "element_present":
+            selector = config["selectors"][target]
+            WebDriverWait(driver, page.timeout).until(
+                EC.presence_of_element_located(page._parse_locator(selector))
+            )
+        elif check == "value":
+            selector = config["selectors"][target]
+            locator = page._parse_locator(selector)
+            WebDriverWait(driver, page.timeout).until(
+                lambda browser: browser.find_element(*locator).get_attribute("value")
+                == expected,
+                message=f"Expected value {expected!r} in {target!r}",
+            )
+        elif check == "selected_value":
+            selector = config["selectors"][target]
+            locator = page._parse_locator(selector)
+            WebDriverWait(driver, page.timeout).until(
+                lambda browser: Select(browser.find_element(*locator))
+                .first_selected_option.get_attribute("value")
+                == expected,
+                message=f"Expected selected value {expected!r} in {target!r}",
+            )
+        elif check == "not_created":
+            selector = config["selectors"]["users_table"]
+            table = WebDriverWait(driver, page.timeout).until(
+                EC.presence_of_element_located(page._parse_locator(selector))
+            )
+            if target in table.text:
+                raise AssertionError(
+                    f"Cancelled user {target!r} appears in the users table"
+                )
+        else:
+            raise ValueError(f"Unsupported expected-result check: {check}")
+
+
+def _run_case(page, driver, row, config):
+    page.open_create_form(config["base_url"])
+
+    if row["scenario"] == "auth_options":
+        page._click(page.selectors["auth_method"])
+        _assert_expected(page, driver, row, config, "before_submit")
+        return
+
+    page.fill_form(row)
+    _assert_expected(page, driver, row, config, "before_submit")
+
+    pictures = [
+        row["profile_picture"],
+        row["profile_picture_2"],
+    ]
+    for index, picture in enumerate((value for value in pictures if value), start=1):
+        page.upload_profile_picture(picture)
+        _assert_expected(page, driver, row, config, f"after_upload_{index}")
+
+    if row["scenario"] == "upload_invalid":
+        return
+    if row["scenario"] == "cancel":
+        page.cancel()
+        _assert_expected(page, driver, row, config, "after_cancel")
+        return
 
     page.submit()
-    if row["expected"] in {"success", "duplicate"}:
-        WebDriverWait(driver, page.timeout).until(
-            lambda browser: row["expected_text"]
-            in browser.find_element(By.TAG_NAME, "body").text
-        )
-        return f"Found expected text: {row['expected_text']}"
+    _assert_expected(page, driver, row, config, "after_submit")
 
-    WebDriverWait(driver, page.timeout).until(
-        EC.presence_of_element_located(
-            (By.CSS_SELECTOR, page.selectors["validation_feedback"])
+    if row["scenario"] in {
+        "suspended_login",
+        "no_login",
+        "force_password_change",
+    }:
+        page.logout_current(config["base_url"])
+        page.submit_login(
+            config["base_url"], row["username"], row["password"]
         )
-    )
-    return "Validation feedback element is present"
+        _assert_expected(page, driver, row, config, "after_login")
 
 
 def run_suite(config, data_path, base_url=None, headless=True, validate_only=False):
@@ -89,29 +166,47 @@ def run_suite(config, data_path, base_url=None, headless=True, validate_only=Fal
 
     from pages.add_user_page import AddUserPage
 
-    options = webdriver.ChromeOptions()
-    if headless:
-        options.add_argument("--headless=new")
-    options.add_argument("--window-size=1440,1000")
-    options.add_argument("--disable-notifications")
+    class DataDrivenMoodleTest(unittest.TestCase):
+        def __init__(self, row):
+            super().__init__("test_case")
+            self.row = row
 
-    driver = webdriver.Chrome(options=options)
-    passed = 0
-    failed = 0
-    try:
-        page = AddUserPage(driver, config)
-        page.login(config["base_url"], username, password)
+        @classmethod
+        def setUpClass(cls):
+            options = webdriver.ChromeOptions()
+            if headless:
+                options.add_argument("--headless=new")
+            options.add_argument("--window-size=1440,1000")
+            options.add_argument("--disable-notifications")
 
-        for row in rows:
+            cls.driver = webdriver.Chrome(options=options)
+            cls.page = AddUserPage(cls.driver, config)
             try:
-                detail = _assert_case(page, driver, row, config)
-                passed += 1
-                print(f"PASS {row['test_id']} - {row['title']}: {detail}")
-            except Exception as error:
-                failed += 1
-                print(f"FAIL {row['test_id']} - {row['title']}: {error}")
-    finally:
-        driver.quit()
+                cls.page.login(config["base_url"], username, password)
+            except Exception:
+                cls.driver.quit()
+                raise
 
-    print(f"\nResult: {passed} passed, {failed} failed, {len(rows)} total")
-    return 0 if failed == 0 else 1
+        @classmethod
+        def tearDownClass(cls):
+            cls.driver.quit()
+
+        def test_case(self):
+            _run_case(self.page, self.driver, self.row, config)
+
+        def tearDown(self):
+            if self.row["scenario"] in {
+                "suspended_login",
+                "no_login",
+                "force_password_change",
+            }:
+                self.page.restore_admin_session(
+                    config["base_url"], username, password
+                )
+
+        def __str__(self):
+            return f"{self.row['test_id']} - {self.row['title']}"
+
+    suite = unittest.TestSuite(DataDrivenMoodleTest(row) for row in rows)
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    return 0 if result.wasSuccessful() else 1

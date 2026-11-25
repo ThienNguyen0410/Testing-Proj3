@@ -1,130 +1,64 @@
-# TC-001: Selenium Data-Driven Testing
+# TC-001 Selenium Data-Driven Testing
 
-## 1. Project structure and implementation
+## Scope
 
-The project separates recorded scenarios, page interactions, test data, functional
-tests, and reusable utilities. This implementation keeps that structure and adds:
+This suite contains the 52 TC-001 scenarios from `katalon/TC001-AddUser.krecorder`.
+The CSV stores each test case as a row with separate input columns and explicit expected-result columns. The Selenium implementation uses Python `unittest`; it creates one unittest case per CSV row.
 
-| File | Purpose |
+## Level 1 and Level 2
+
+| Level | Where test items are configured |
 |---|---|
-| `pages/add_user_page.py` | Selenium page object for Moodle login and user creation |
-| `utils/data_reader.py` | Reads and validates the data CSV |
-| `utils/ddt_runner.py` | Shared Selenium runner, assertions, and result summary |
-| `tests/FR/TC001_DDT_Level1.py` | Level 1: test data in CSV; URLs/selectors in Python |
-| `tests/FR/TC001_DDT_Level2.py` | Level 2: test data in CSV; URLs/selectors in JSON |
-| `test_data/add_user_test_data.csv` | The ten requested TC-001 cases and their expected outcomes |
-| `test_data/tc001_ddt_config.json` | Level 2 site URL paths and element selectors |
+| Level 1 | `tests/FR/TC001_DDT_Level1.py`: site routes and element selectors are defined in the Python `CONFIG`. Test values and expected results are in the CSV. |
+| Level 2 | `test_data/tc001_ddt_config.json`: site routes and element selectors are loaded from JSON. Test values and expected results are in the same CSV. |
 
-The selectors and relative paths are based on
-[`katalon/TC001-AddUser.krecorder`](./katalon/TC001-AddUser.krecorder). The recorder
-does not specify a host name, so set the Moodle base URL before running.
+Both levels share the same page object and `unittest` runner. The difference is the source of URLs and selectors, not separate test logic.
 
-## 2. TC-001-031 clarification
+## CSV layout
 
-The recorder labels this case **“Mobile phone length 18”**, enters 18 digits, checks
-that the value is present, and then checks for `.form-control-feedback.invalid-feedback`.
-That assertion indicates validation feedback is expected. The CSV therefore currently
-expects `validation`, following the recorder's assertion rather than guessing from the
-title. Confirm the intended product rule (whether 18 digits should be valid) with the
-test owner; if it should be valid, change the row's `expected` value to `success` and
-set the expected success text accordingly.
+The CSV has one row per test case. Common fields include username, authentication method, password, names, email, profile fields, phones, tags, checkbox settings, and upload fixture paths. `scenario` selects the small number of different flows (for example cancellation, failed login, or image upload).
 
-## 3. Requirements
+`Expected Result`, `Expected Result 2`, and `Expected Result 3` hold the expected outcomes. The matching `Expected Check`, `Expected Target`, and `Expected Stage` columns say how and when to verify each outcome. Supported checks are text, element presence, input value, selected value, and cancelled-user absence. This retains recorder assertions such as invalid-feedback presence without inventing validation messages.
 
-- Python 3.9 or newer.
-- Selenium 4.6 or newer (Selenium Manager can resolve the Chrome driver).
-- Google Chrome installed.
-- A reachable Moodle site and an account permitted to create users.
-- The test account must be able to create Manual accounts.
+Example rows (only the most relevant columns shown):
 
-No Selenium test can be fully verified without the target Moodle site and credentials.
-Use a test instance: successful rows create user accounts.
+| Test ID | Scenario | Username | Expected Result | Expected Check | Expected Stage |
+|---|---|---|---|---|---|
+| TC-001-001 | create_user | tc001_full_001 | Changes saved | text | after_submit |
+| TC-001-008 | create_user | tc001_full_008 | present | element_present | after_submit |
+| TC-001-026 | create_user | tc001_full_026 | 1111111111 | value | after_submit |
+| TC-001-046 | suspended_login | tc001_full_046 | User created successfully | text | after_submit |
+| TC-001-051 | upload_multiple | tc001_full_051 | maximum number of files: 1 | text | after_upload_1 |
 
-## 4. Configure and run (Windows PowerShell)
+The complete dataset is `test_data/add_user_test_data.csv`; upload fixtures are under `test_data/assets/`.
 
-Run commands from the project root:
+## Configure and run
 
-```powershell
-cd C:\Users\Thien\Documents\HCMUT\261\Testing\Proj3
-```
+Set `MOODLE_BASE_URL`, `MOODLE_USERNAME`, and `MOODLE_PASSWORD` in the environment or project-root `.env`. The runner supports simple `KEY=VALUE` entries in `.env`; credentials are not stored in the CSV or source code. Use a disposable Moodle instance: successful cases create accounts.
 
-Set credentials in the current PowerShell session. These are environment variables,
-not source-code values:
-
-```powershell
-$env:MOODLE_USERNAME = "your-admin-username"
-$env:MOODLE_PASSWORD = "your-admin-password"
-$env:MOODLE_BASE_URL = "http://localhost/moodle"
-```
-
-Replace the URL with the actual Moodle installation URL, for example
-`http://localhost` if Moodle is installed at the web root. The URL must not end with
-`/login/index.php`; that path is appended by the test.
-
-The runner also loads `.env` from the project root and gives its values precedence
-over variables already set in the shell. Keep that file local and do not commit it.
-
-### Level 1
-
-Test values come from the CSV. Base URL is provided by the environment or CLI;
-relative page paths and selectors are embedded in the Python script.
+From the project root on Windows:
 
 ```powershell
 python -m tests.FR.TC001_DDT_Level1 --validate-only
-python -m tests.FR.TC001_DDT_Level1
-```
-
-To display Chrome while the tests run:
-
-```powershell
 python -m tests.FR.TC001_DDT_Level1 --headed
-```
-
-Or provide the site URL directly:
-
-```powershell
-python -m tests.FR.TC001_DDT_Level1 --base-url "http://localhost/moodle"
-```
-
-### Level 2
-
-Test values come from the CSV. Base URL, relative paths, and element selectors are
-loaded from `test_data/tc001_ddt_config.json`. Update its `base_url` and, if the
-installation differs, the `urls` or `selectors` values.
-
-```powershell
 python -m tests.FR.TC001_DDT_Level2 --validate-only
-python -m tests.FR.TC001_DDT_Level2
-```
-
-To display Chrome or override the configured URL:
-
-```powershell
 python -m tests.FR.TC001_DDT_Level2 --headed
-python -m tests.FR.TC001_DDT_Level2 --base-url "http://localhost/moodle"
 ```
 
-`--validate-only` checks CSV headers, row IDs, and expected outcome values without
-starting Chrome or connecting to Moodle. A full run prints PASS/FAIL per case and
-returns exit code 1 if any case fails. The browser runs headless by default.
+From WSL/Linux:
 
-If login fails, the runner now reports the visible Moodle login error when available;
-otherwise it reports the current URL, page title, and whether the login form remains
-visible. Confirm the credentials and target URL, then compare the Level 2
-`logged_in_marker` and `login_error` selectors with the actual page if using a custom
-Moodle theme.
-
-If Selenium is not available in the active Python environment, install it there:
-
-```powershell
-python -m pip install "selenium>=4.6"
+```bash
+python3 -m tests.FR.TC001_DDT_Level1 --validate-only
+python3 -m tests.FR.TC001_DDT_Level1 --headed
+python3 -m tests.FR.TC001_DDT_Level2 --validate-only
+python3 -m tests.FR.TC001_DDT_Level2 --headed
 ```
 
-The test data has unique usernames for most cases. Before rerunning, remove any users
-created by earlier successful runs or change those usernames in the CSV. The
-duplicate-user scenario intentionally uses the existing `admin` username.
+`--validate-only` checks the CSV schema and all 52 rows without opening Chrome. Full runs use `unittest` and Selenium; Selenium and Chrome must be installed in the selected Python environment. Level 2's configured base URL can be overridden with `--base-url` or `MOODLE_BASE_URL`.
 
-## 5. Source code
+## Source code
+
+The following listings are embedded from the current source files. The CSV itself is maintained separately so its rows remain easy to edit in a spreadsheet.
 
 ### `utils/data_reader.py`
 
@@ -137,16 +71,79 @@ from pathlib import Path
 REQUIRED_COLUMNS = {
     "test_id",
     "title",
+    "scenario",
     "username",
+    "authentication",
     "password",
     "firstname",
     "lastname",
     "email",
+    "city",
+    "moodlenet_profile",
+    "country",
+    "timezone",
+    "firstname_phonetic",
+    "lastname_phonetic",
+    "middle_name",
+    "alternate_name",
+    "id_number",
+    "institution",
+    "department",
     "phone",
     "mobile_phone",
-    "expected",
-    "expected_text",
+    "address",
+    "interests",
+    "email_visibility",
+    "language",
+    "create_password",
+    "force_password_change",
+    "suspended",
+    "profile_picture",
+    "profile_picture_2",
+    "Expected Result",
+    "Expected Check",
+    "Expected Target",
+    "Expected Stage",
+    "Expected Result 2",
+    "Expected Check 2",
+    "Expected Target 2",
+    "Expected Stage 2",
+    "Expected Result 3",
+    "Expected Check 3",
+    "Expected Target 3",
+    "Expected Stage 3",
 }
+SCENARIOS = {
+    "create_user",
+    "auth_options",
+    "cancel",
+    "suspended_login",
+    "no_login",
+    "force_password_change",
+    "upload_valid",
+    "upload_invalid",
+    "upload_multiple",
+}
+EXPECTED_CHECKS = {
+    "text",
+    "element_present",
+    "value",
+    "selected_value",
+    "not_created",
+}
+EXPECTED_STAGES = {
+    "before_submit",
+    "after_upload_1",
+    "after_upload_2",
+    "after_submit",
+    "after_login",
+    "after_cancel",
+}
+EXPECTED_SLOTS = (
+    ("Expected Result", "Expected Check", "Expected Target", "Expected Stage"),
+    ("Expected Result 2", "Expected Check 2", "Expected Target 2", "Expected Stage 2"),
+    ("Expected Result 3", "Expected Check 3", "Expected Target 3", "Expected Stage 3"),
+)
 
 
 def read_test_data(file_path):
@@ -167,33 +164,274 @@ def read_test_data(file_path):
         rows = []
         seen_ids = set()
         for line_number, row in enumerate(reader, start=2):
-            test_id = (row.get("test_id") or "").strip()
+            cleaned = {
+                key: (value or "").strip()
+                for key, value in row.items()
+                if key is not None
+            }
+            test_id = cleaned.get("test_id", "")
             if not test_id:
                 raise ValueError(f"{path}:{line_number}: test_id must not be empty")
             if test_id in seen_ids:
                 raise ValueError(f"{path}:{line_number}: duplicate test_id {test_id}")
             seen_ids.add(test_id)
 
-            cleaned = {
-                key: (value or "").strip()
-                for key, value in row.items()
-                if key is not None
-            }
-            if cleaned["expected"] not in {"success", "validation", "duplicate", "cancelled"}:
+            if cleaned.get("scenario") not in SCENARIOS:
                 raise ValueError(
-                    f"{path}:{line_number}: unsupported expected value "
-                    f"{cleaned['expected']!r}"
+                    f"{path}:{line_number}: unsupported scenario "
+                    f"{cleaned.get('scenario')!r}"
                 )
-            if cleaned["expected"] in {"success", "duplicate"} and not cleaned["expected_text"]:
+            if not any(cleaned[result] for result, _, _, _ in EXPECTED_SLOTS):
                 raise ValueError(
-                    f"{path}:{line_number}: expected_text is required for "
-                    f"{cleaned['expected']} cases"
+                    f"{path}:{line_number}: at least one Expected Result is required"
                 )
+            for result_column, check_column, target_column, stage_column in EXPECTED_SLOTS:
+                result = cleaned[result_column]
+                check = cleaned[check_column]
+                target = cleaned[target_column]
+                stage = cleaned[stage_column]
+                if not result and not (check or target or stage):
+                    continue
+                if (
+                    not result
+                    or check not in EXPECTED_CHECKS
+                    or stage not in EXPECTED_STAGES
+                ):
+                    raise ValueError(
+                        f"{path}:{line_number}: invalid expectation in "
+                        f"{result_column}"
+                    )
+                if check in {
+                    "element_present",
+                    "value",
+                    "selected_value",
+                    "not_created",
+                } and not target:
+                    raise ValueError(
+                        f"{path}:{line_number}: target required for {result_column}"
+                    )
             rows.append(cleaned)
 
     if not rows:
         raise ValueError(f"{path} contains no test rows")
     return rows
+```
+
+### `utils/ddt_runner.py`
+
+```python
+import os
+import re
+import sys
+import unittest
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from utils.data_reader import EXPECTED_SLOTS, read_test_data
+
+
+def _load_environment_file(path):
+    if not path.is_file():
+        return
+
+    for line_number, raw_line in enumerate(
+        path.read_text(encoding="utf-8-sig").splitlines(), start=1
+    ):
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            line = line[len("export "):].strip()
+        key, separator, value = line.partition("=")
+        key = key.strip()
+        if not separator or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", key):
+            raise ValueError(f"{path}:{line_number}: invalid environment entry")
+        value = value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+            value = value[1:-1]
+        else:
+            value = value.split(" #", maxsplit=1)[0].rstrip()
+        os.environ[key] = value
+
+
+_load_environment_file(PROJECT_ROOT / ".env")
+
+
+def validate_data(data_path):
+    rows = read_test_data(data_path)
+    print(f"CSV OK: {len(rows)} test cases")
+    for row in rows:
+        print(f"  {row['test_id']}: {row['title']} [{row['scenario']}]")
+    return 0
+
+
+def _assert_expected(page, driver, row, config, stage):
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.webdriver.support.ui import Select, WebDriverWait
+
+    for result_column, check_column, target_column, stage_column in EXPECTED_SLOTS:
+        if row[stage_column] != stage:
+            continue
+
+        expected = row[result_column]
+        check = row[check_column]
+        target = row[target_column]
+        if check == "text":
+            WebDriverWait(driver, page.timeout).until(
+                lambda browser: expected
+                in browser.find_element(By.TAG_NAME, "body").text,
+                message=f"Expected page text was not found: {expected}",
+            )
+        elif check == "element_present":
+            selector = config["selectors"][target]
+            WebDriverWait(driver, page.timeout).until(
+                EC.presence_of_element_located(page._parse_locator(selector))
+            )
+        elif check == "value":
+            selector = config["selectors"][target]
+            locator = page._parse_locator(selector)
+            WebDriverWait(driver, page.timeout).until(
+                lambda browser: browser.find_element(*locator).get_attribute("value")
+                == expected,
+                message=f"Expected value {expected!r} in {target!r}",
+            )
+        elif check == "selected_value":
+            selector = config["selectors"][target]
+            locator = page._parse_locator(selector)
+            WebDriverWait(driver, page.timeout).until(
+                lambda browser: Select(browser.find_element(*locator))
+                .first_selected_option.get_attribute("value")
+                == expected,
+                message=f"Expected selected value {expected!r} in {target!r}",
+            )
+        elif check == "not_created":
+            selector = config["selectors"]["users_table"]
+            table = WebDriverWait(driver, page.timeout).until(
+                EC.presence_of_element_located(page._parse_locator(selector))
+            )
+            if target in table.text:
+                raise AssertionError(
+                    f"Cancelled user {target!r} appears in the users table"
+                )
+        else:
+            raise ValueError(f"Unsupported expected-result check: {check}")
+
+
+def _run_case(page, driver, row, config):
+    page.open_create_form(config["base_url"])
+
+    if row["scenario"] == "auth_options":
+        page._click(page.selectors["auth_method"])
+        _assert_expected(page, driver, row, config, "before_submit")
+        return
+
+    page.fill_form(row)
+    _assert_expected(page, driver, row, config, "before_submit")
+
+    pictures = [
+        row["profile_picture"],
+        row["profile_picture_2"],
+    ]
+    for index, picture in enumerate((value for value in pictures if value), start=1):
+        page.upload_profile_picture(picture)
+        _assert_expected(page, driver, row, config, f"after_upload_{index}")
+
+    if row["scenario"] == "upload_invalid":
+        return
+    if row["scenario"] == "cancel":
+        page.cancel()
+        _assert_expected(page, driver, row, config, "after_cancel")
+        return
+
+    page.submit()
+    _assert_expected(page, driver, row, config, "after_submit")
+
+    if row["scenario"] in {
+        "suspended_login",
+        "no_login",
+        "force_password_change",
+    }:
+        page.logout_current(config["base_url"])
+        page.submit_login(
+            config["base_url"], row["username"], row["password"]
+        )
+        _assert_expected(page, driver, row, config, "after_login")
+
+
+def run_suite(config, data_path, base_url=None, headless=True, validate_only=False):
+    rows = read_test_data(data_path)
+    if validate_only:
+        return validate_data(data_path)
+
+    effective_base_url = (
+        base_url or os.environ.get("MOODLE_BASE_URL") or config.get("base_url", "")
+    ).strip()
+    if not effective_base_url:
+        raise ValueError(
+            "Set MOODLE_BASE_URL, configure base_url, or pass --base-url."
+        )
+    config = dict(config)
+    config["base_url"] = effective_base_url.rstrip("/")
+
+    username = os.environ.get("MOODLE_USERNAME", "")
+    password = os.environ.get("MOODLE_PASSWORD", "")
+    if not username or not password:
+        raise ValueError(
+            "Set MOODLE_USERNAME and MOODLE_PASSWORD in environment variables."
+        )
+
+    from selenium import webdriver
+
+    from pages.add_user_page import AddUserPage
+
+    class DataDrivenMoodleTest(unittest.TestCase):
+        def __init__(self, row):
+            super().__init__("test_case")
+            self.row = row
+
+        @classmethod
+        def setUpClass(cls):
+            options = webdriver.ChromeOptions()
+            if headless:
+                options.add_argument("--headless=new")
+            options.add_argument("--window-size=1440,1000")
+            options.add_argument("--disable-notifications")
+
+            cls.driver = webdriver.Chrome(options=options)
+            cls.page = AddUserPage(cls.driver, config)
+            try:
+                cls.page.login(config["base_url"], username, password)
+            except Exception:
+                cls.driver.quit()
+                raise
+
+        @classmethod
+        def tearDownClass(cls):
+            cls.driver.quit()
+
+        def test_case(self):
+            _run_case(self.page, self.driver, self.row, config)
+
+        def tearDown(self):
+            if self.row["scenario"] in {
+                "suspended_login",
+                "no_login",
+                "force_password_change",
+            }:
+                self.page.restore_admin_session(
+                    config["base_url"], username, password
+                )
+
+        def __str__(self):
+            return f"{self.row['test_id']} - {self.row['title']}"
+
+    suite = unittest.TestSuite(DataDrivenMoodleTest(row) for row in rows)
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    return 0 if result.wasSuccessful() else 1
 ```
 
 ### `pages/add_user_page.py`
@@ -217,14 +455,26 @@ class AddUserPage:
         self.selectors = config["selectors"]
         self.urls = config["urls"]
 
+    @staticmethod
+    def _parse_locator(locator):
+        if locator.startswith("css="):
+            return By.CSS_SELECTOR, locator[4:]
+        if locator.startswith("xpath="):
+            return By.XPATH, locator[6:]
+        if locator.startswith("id="):
+            return By.ID, locator[3:]
+        if locator.startswith("id_"):
+            return By.ID, locator
+        return By.CSS_SELECTOR, locator
+
     def _wait_visible(self, selector):
         return WebDriverWait(self.driver, self.timeout).until(
-            EC.visibility_of_element_located((By.CSS_SELECTOR, selector))
+            EC.visibility_of_element_located(self._parse_locator(selector))
         )
 
     def _wait_clickable(self, selector):
         return WebDriverWait(self.driver, self.timeout).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, selector))
+            EC.element_to_be_clickable(self._parse_locator(selector))
         )
 
     def _click(self, selector):
@@ -277,9 +527,11 @@ class AddUserPage:
             ) from error
 
     def _type_and_wait(self, selector, value):
+        locator = self._parse_locator(selector)
+
         def populate_field(driver):
             try:
-                element = driver.find_element(By.CSS_SELECTOR, selector)
+                element = driver.find_element(*locator)
                 if not element.is_displayed():
                     return False
                 if element.get_attribute("value") == value:
@@ -297,10 +549,23 @@ class AddUserPage:
         )
 
     def login(self, base_url, username, password):
+        status, message = self.attempt_login(base_url, username, password)
+        if status == "error":
+            raise RuntimeError(
+                f"Moodle rejected the login: {message}. Check "
+                "MOODLE_USERNAME and MOODLE_PASSWORD."
+            )
+        if status != "success":
+            raise RuntimeError(f"Moodle login returned an unknown status: {status}")
+
+    def submit_login(self, base_url, username, password):
         self.driver.get(f"{base_url.rstrip('/')}{self.urls['login']}")
         self._type_and_wait(self.selectors["login_username"], username)
         self._type_and_wait(self.selectors["login_password"], password)
         self._click(self.selectors["login_button"])
+
+    def attempt_login(self, base_url, username, password):
+        self.submit_login(base_url, username, password)
         try:
             outcome = WebDriverWait(self.driver, self.timeout).until(
                 self._login_outcome
@@ -309,7 +574,7 @@ class AddUserPage:
             login_form_visible = any(
                 element.is_displayed()
                 for element in self.driver.find_elements(
-                    By.CSS_SELECTOR, self.selectors["login_username"]
+                    *self._parse_locator(self.selectors["login_username"])
                 )
             )
             raise RuntimeError(
@@ -321,17 +586,12 @@ class AddUserPage:
                 "Moodle credentials, base URL, and configured login selectors."
             ) from error
 
-        status, message = outcome
-        if status == "error":
-            raise RuntimeError(
-                f"Moodle rejected the login: {message}. Check "
-                "MOODLE_USERNAME and MOODLE_PASSWORD."
-            )
+        return outcome
 
     def _login_outcome(self, driver):
         error_selector = self.selectors.get("login_error")
         if error_selector:
-            for element in driver.find_elements(By.CSS_SELECTOR, error_selector):
+            for element in driver.find_elements(*self._parse_locator(error_selector)):
                 message = element.text.strip()
                 if element.is_displayed() and message:
                     return "error", message
@@ -339,11 +599,11 @@ class AddUserPage:
         login_form_visible = any(
             element.is_displayed()
             for element in driver.find_elements(
-                By.CSS_SELECTOR, self.selectors["login_username"]
+                *self._parse_locator(self.selectors["login_username"])
             )
         )
         for element in driver.find_elements(
-            By.CSS_SELECTOR, self.selectors["logged_in_marker"]
+            *self._parse_locator(self.selectors["logged_in_marker"])
         ):
             if element.is_displayed() and not login_form_visible:
                 return "success", ""
@@ -353,26 +613,144 @@ class AddUserPage:
         self.driver.get(f"{base_url.rstrip('/')}{self.urls['create_user']}")
         self._wait_visible(self.selectors["username"])
 
+    def restore_admin_session(self, base_url, username, password):
+        self.logout_current(base_url)
+        self.login(base_url, username, password)
+
+    def logout_current(self, base_url):
+        self.driver.get(
+            f"{base_url.rstrip('/')}{self.urls.get('logout', '/login/logout.php')}"
+        )
+        confirm_selector = self.selectors.get("logout_confirm")
+        if confirm_selector:
+            login_locator = self._parse_locator(self.selectors["login_username"])
+
+            def logout_state(driver):
+                if any(
+                    button.is_displayed()
+                    for button in driver.find_elements(
+                        *self._parse_locator(confirm_selector)
+                    )
+                ):
+                    return "confirm"
+                if any(
+                    field.is_displayed()
+                    for field in driver.find_elements(*login_locator)
+                ):
+                    return "logged_out"
+                return False
+
+            state = WebDriverWait(self.driver, self.timeout).until(logout_state)
+            if state == "confirm":
+                self._click(confirm_selector)
+
     def fill_form(self, data):
         self._replace_text(self.selectors["username"], data["username"])
 
         auth = Select(self._wait_visible(self.selectors["auth_method"]))
-        auth.select_by_visible_text(self.config["manual_auth_label"])
+        auth.select_by_visible_text(data["authentication"])
 
-        self._click(self.selectors["password_toggle"])
-        if data["password"]:
+        if data["authentication"] == self.config["manual_auth_label"]:
+            self._click(self.selectors["password_toggle"])
             self._replace_text(self.selectors["new_password"], data["password"])
 
         for field in ("firstname", "lastname", "email"):
             self._replace_text(self.selectors[field], data[field])
 
-        if data["phone"] or data["mobile_phone"]:
+        for field in ("city", "moodlenet_profile"):
+            if data[field]:
+                self._replace_text(self.selectors[field], data[field])
+
+        if any(data[field] for field in (
+            "firstname_phonetic",
+            "lastname_phonetic",
+            "middle_name",
+            "alternate_name",
+        )):
+            self._click(self.selectors["names_section_toggle"])
+            self._wait_visible(self.selectors["names_section_open"])
+            for field in (
+                "firstname_phonetic",
+                "lastname_phonetic",
+                "middle_name",
+                "alternate_name",
+            ):
+                if data[field]:
+                    self._replace_text(self.selectors[field], data[field])
+
+        if any(
+            data[field]
+            for field in (
+                "id_number",
+                "institution",
+                "department",
+                "phone",
+                "mobile_phone",
+                "address",
+            )
+        ):
             self._click(self.selectors["optional_section_toggle"])
             self._wait_visible(self.selectors["optional_section_open"])
-            if data["phone"]:
-                self._replace_text(self.selectors["phone"], data["phone"])
-            if data["mobile_phone"]:
-                self._replace_text(self.selectors["mobile_phone"], data["mobile_phone"])
+            for field in (
+                "id_number",
+                "institution",
+                "department",
+                "phone",
+                "mobile_phone",
+                "address",
+            ):
+                if data[field]:
+                    self._replace_text(self.selectors[field], data[field])
+
+        for field in ("country", "timezone", "email_visibility"):
+            if data[field]:
+                select = Select(self._wait_visible(self.selectors[field]))
+                value = data[field]
+                if value.startswith("label="):
+                    value = value[len("label="):]
+                select.select_by_visible_text(value)
+
+        if data["interests"]:
+            self._click(self.selectors["interests_section_toggle"])
+            self._wait_visible(self.selectors["interests_section_open"])
+            from selenium.webdriver.common.keys import Keys
+
+            for interest in data["interests"].split("|"):
+                if interest:
+                    input_element = self._wait_visible(
+                        self.selectors["interests_input"]
+                    )
+                    input_element.send_keys(interest)
+                    input_element.send_keys(Keys.ENTER)
+
+        for field, selector_key in (
+            ("create_password", "create_password"),
+            ("force_password_change", "force_password_change"),
+            ("suspended", "suspended"),
+        ):
+            if data[field]:
+                expected = data[field].strip().lower() in {"1", "true", "yes"}
+                checkbox = self._wait_visible(self.selectors[selector_key])
+                if checkbox.is_selected() != expected:
+                    self._click(self.selectors[selector_key])
+
+    def upload_profile_picture(self, file_path):
+        from pathlib import Path
+
+        self._click(self.selectors["image_add"])
+        self._click(self.selectors["upload_file_menu"])
+        file_input = WebDriverWait(self.driver, self.timeout).until(
+            EC.presence_of_element_located(
+                self._parse_locator(self.selectors["profile_upload_input"])
+            )
+        )
+        path = Path(file_path)
+        if not path.is_absolute():
+            path = Path(__file__).resolve().parents[1] / path
+        if not path.is_file():
+            raise FileNotFoundError(f"Upload file does not exist: {path}")
+        file_input.send_keys(str(path.resolve()))
+        self._click(self.selectors["upload_button"])
 
     def submit(self):
         self._click(self.selectors["submit_button"])
@@ -381,130 +759,7 @@ class AddUserPage:
         self._click(self.selectors["cancel_button"])
 
     def _replace_text(self, selector, value):
-        element = self._wait_visible(selector)
-        element.clear()
-        if value:
-            element.send_keys(value)
-```
-
-### `utils/ddt_runner.py`
-
-```python
-import os
-import sys
-from pathlib import Path
-
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
-
-from pages.add_user_page import AddUserPage
-from utils.data_reader import read_test_data
-
-
-def validate_data(data_path):
-    rows = read_test_data(data_path)
-    print(f"CSV OK: {len(rows)} test cases")
-    for row in rows:
-        print(f"  {row['test_id']}: {row['title']}")
-    return 0
-
-
-def _assert_case(page, driver, row, config):
-    from selenium.webdriver.common.by import By
-    from selenium.webdriver.support import expected_conditions as EC
-    from selenium.webdriver.support.ui import WebDriverWait
-
-    page.open_create_form(config["base_url"])
-    page.fill_form(row)
-
-    if row["expected"] == "cancelled":
-        page.cancel()
-        create_form_url = (
-            f"{config['base_url'].rstrip('/')}{config['urls']['create_user']}"
-        ).rstrip("/")
-        WebDriverWait(driver, page.timeout).until(
-            lambda browser: browser.current_url.rstrip("/") != create_form_url
-        )
-        WebDriverWait(driver, page.timeout).until(
-            EC.presence_of_element_located(
-                (By.CSS_SELECTOR, page.selectors["users_table"])
-            )
-        )
-        if row["username"] and row["username"] in driver.find_element(
-            By.TAG_NAME, "body"
-        ).text:
-            raise AssertionError("Cancelled username appears on the user list")
-        return "Cancel returned to the user list; username was not created"
-
-    page.submit()
-    if row["expected"] in {"success", "duplicate"}:
-        WebDriverWait(driver, page.timeout).until(
-            lambda browser: row["expected_text"]
-            in browser.find_element(By.TAG_NAME, "body").text
-        )
-        return f"Found expected text: {row['expected_text']}"
-
-    WebDriverWait(driver, page.timeout).until(
-        EC.presence_of_element_located(
-            (By.CSS_SELECTOR, page.selectors["validation_feedback"])
-        )
-    )
-    return "Validation feedback element is present"
-
-
-def run_suite(config, data_path, base_url=None, headless=True, validate_only=False):
-    rows = read_test_data(data_path)
-    if validate_only:
-        return validate_data(data_path)
-
-    effective_base_url = (
-        base_url or os.environ.get("MOODLE_BASE_URL") or config.get("base_url", "")
-    ).strip()
-    if not effective_base_url:
-        raise ValueError(
-            "Set MOODLE_BASE_URL, configure base_url, or pass --base-url."
-        )
-    config = dict(config)
-    config["base_url"] = effective_base_url.rstrip("/")
-
-    username = os.environ.get("MOODLE_USERNAME", "")
-    password = os.environ.get("MOODLE_PASSWORD", "")
-    if not username or not password:
-        raise ValueError(
-            "Set MOODLE_USERNAME and MOODLE_PASSWORD in environment variables."
-        )
-
-    from selenium import webdriver
-
-    from pages.add_user_page import AddUserPage
-
-    options = webdriver.ChromeOptions()
-    if headless:
-        options.add_argument("--headless=new")
-    options.add_argument("--window-size=1440,1000")
-    options.add_argument("--disable-notifications")
-
-    driver = webdriver.Chrome(options=options)
-    passed = 0
-    failed = 0
-    try:
-        page = AddUserPage(driver, config)
-        page.login(config["base_url"], username, password)
-
-        for row in rows:
-            try:
-                detail = _assert_case(page, driver, row, config)
-                passed += 1
-                print(f"PASS {row['test_id']} - {row['title']}: {detail}")
-            except Exception as error:
-                failed += 1
-                print(f"FAIL {row['test_id']} - {row['title']}: {error}")
-    finally:
-        driver.quit()
-
-    print(f"\nResult: {passed} passed, {failed} failed, {len(rows)} total")
-    return 0 if failed == 0 else 1
+        self._type_and_wait(selector, value)
 ```
 
 ### `tests/FR/TC001_DDT_Level1.py`
@@ -520,6 +775,7 @@ CONFIG = {
     "base_url": "",
     "urls": {
         "login": "/login/index.php",
+        "logout": "/login/logout.php",
         "create_user": "/user/editadvanced.php?id=-1",
         "users": "/admin/user.php",
     },
@@ -529,23 +785,52 @@ CONFIG = {
         "login_username": "#username",
         "login_password": "#password",
         "login_button": "#loginbtn",
+        "logout_confirm": "css=[role='alertdialog'] button.btn-primary",
         "logged_in_marker": ".navbar, #usernavigation, .usermenu, [data-region='usermenu']",
         "login_error": "#loginerrormessage, .loginerrors, .alert-danger, [role='alert']",
         "username": "#id_username",
         "auth_method": "#id_auth",
+        "auth_options": "#id_auth option",
         "password_toggle": "#fitem_id_newpassword [data-passwordunmask='edit']",
         "new_password": "#id_newpassword",
         "firstname": "#id_firstname",
         "lastname": "#id_lastname",
         "email": "#id_email",
+        "city": "#id_city",
+        "moodlenet_profile": "#id_moodlenetprofile",
+        "country": "#id_country",
+        "timezone": "#id_timezone",
+        "firstname_phonetic": "#id_firstnamephonetic",
+        "lastname_phonetic": "#id_lastnamephonetic",
+        "middle_name": "#id_middlename",
+        "alternate_name": "#id_alternatename",
+        "id_number": "#id_idnumber",
+        "institution": "#id_institution",
+        "department": "#id_department",
+        "address": "#id_address",
+        "email_visibility": "#id_maildisplay",
+        "language": "#id_lang",
+        "create_password": "#id_createpassword",
+        "force_password_change": "#id_preference_auth_forcepasswordchange",
+        "suspended": "#id_suspended",
         "optional_section_toggle": "a[data-bs-toggle='collapse'][href='#id_moodle_optionalcontainer']",
         "optional_section_open": "#id_moodle_optionalcontainer.show",
+        "names_section_toggle": "a[data-bs-toggle='collapse'][href='#id_moodle_additional_namescontainer']",
+        "names_section_open": "#id_moodle_additional_namescontainer.show",
+        "interests_section_toggle": "a[data-bs-toggle='collapse'][href='#id_moodle_interestscontainer']",
+        "interests_section_open": "#id_moodle_interestscontainer.show",
+        "interests_input": "#fitem_id_interests input[role='textbox']",
         "phone": "#id_phone1",
         "mobile_phone": "#id_phone2",
         "submit_button": "#id_submitbutton",
         "cancel_button": "#id_cancel",
         "validation_feedback": ".form-control-feedback.invalid-feedback, .invalid-feedback, [role='alert']",
+        "validation_feedback_simple": ".form-control-feedback.invalid-feedback",
         "users_table": "table",
+        "image_add": "#id_imagefile_fieldset a[title='Add...']",
+        "upload_file_menu": "xpath=//a[.//span[normalize-space()='Upload a file']]",
+        "upload_button": "button.fp-upload-btn",
+        "profile_upload_input": "input[type='file'][name='repo_upload_file']",
     },
 }
 
@@ -639,6 +924,7 @@ if __name__ == "__main__":
   "base_url": "http://localhost/moodle",
   "urls": {
     "login": "/login/index.php",
+    "logout": "/login/logout.php",
     "create_user": "/user/editadvanced.php?id=-1",
     "users": "/admin/user.php"
   },
@@ -648,39 +934,53 @@ if __name__ == "__main__":
     "login_username": "#username",
     "login_password": "#password",
     "login_button": "#loginbtn",
+    "logout_confirm": "css=[role='alertdialog'] button.btn-primary",
     "logged_in_marker": ".navbar, #usernavigation, .usermenu, [data-region='usermenu']",
     "login_error": "#loginerrormessage, .loginerrors, .alert-danger, [role='alert']",
     "username": "#id_username",
     "auth_method": "#id_auth",
+    "auth_options": "#id_auth option",
     "password_toggle": "#fitem_id_newpassword [data-passwordunmask='edit']",
     "new_password": "#id_newpassword",
     "firstname": "#id_firstname",
     "lastname": "#id_lastname",
     "email": "#id_email",
+    "city": "#id_city",
+    "moodlenet_profile": "#id_moodlenetprofile",
+    "country": "#id_country",
+    "timezone": "#id_timezone",
+    "firstname_phonetic": "#id_firstnamephonetic",
+    "lastname_phonetic": "#id_lastnamephonetic",
+    "middle_name": "#id_middlename",
+    "alternate_name": "#id_alternatename",
+    "id_number": "#id_idnumber",
+    "institution": "#id_institution",
+    "department": "#id_department",
+    "address": "#id_address",
+    "email_visibility": "#id_maildisplay",
+    "language": "#id_lang",
+    "create_password": "#id_createpassword",
+    "force_password_change": "#id_preference_auth_forcepasswordchange",
+    "suspended": "#id_suspended",
     "optional_section_toggle": "a[data-bs-toggle='collapse'][href='#id_moodle_optionalcontainer']",
     "optional_section_open": "#id_moodle_optionalcontainer.show",
+    "names_section_toggle": "a[data-bs-toggle='collapse'][href='#id_moodle_additional_namescontainer']",
+    "names_section_open": "#id_moodle_additional_namescontainer.show",
+    "interests_section_toggle": "a[data-bs-toggle='collapse'][href='#id_moodle_interestscontainer']",
+    "interests_section_open": "#id_moodle_interestscontainer.show",
+    "interests_input": "#fitem_id_interests input[role='textbox']",
     "phone": "#id_phone1",
     "mobile_phone": "#id_phone2",
     "submit_button": "#id_submitbutton",
     "cancel_button": "#id_cancel",
     "validation_feedback": ".form-control-feedback.invalid-feedback, .invalid-feedback, [role='alert']",
-    "users_table": "table"
+    "validation_feedback_simple": ".form-control-feedback.invalid-feedback",
+    "users_table": "table",
+    "image_add": "#id_imagefile_fieldset a[title='Add...']",
+    "upload_file_menu": "xpath=//a[.//span[normalize-space()='Upload a file']]",
+    "upload_button": "button.fp-upload-btn",
+    "profile_upload_input": "input[type='file'][name='repo_upload_file']"
   }
 }
 ```
 
-### `test_data/add_user_test_data.csv`
-
-```csv
-test_id,title,username,password,firstname,lastname,email,phone,mobile_phone,expected,expected_text
-TC-001-001,Create user with valid required fields,tc001_ddt_valid,ValidPass123!,Test,User,tc001_valid@example.com,,,success,Changes saved
-TC-001-002,Username is empty,,ValidPass123!,Test,User,tc001_empty_username@example.com,,,validation,
-TC-001-005,Username contains unsupported special character,test#user,ValidPass123!,Test,User,tc001_special_char@example.com,,,validation,
-TC-001-007,Duplicate username,admin,ValidPass123!,Test,User,tc001_duplicate@example.com,,,duplicate,"This username already exists, choose another"
-TC-001-008,Password is empty with Manual accounts,tc001_empty_password,,Test,User,tc001_empty_password@example.com,,,validation,
-TC-001-015,Email has invalid format,tc001_invalid_email,ValidPass123!,Test,User,invalid@,,,validation,
-TC-001-017,Optional profile fields are empty,tc001_optional_empty,ValidPass123!,Test,User,tc001_optional_empty@example.com,,,success,Changes saved
-TC-001-025,Phone length 20,tc001_phone_20,ValidPass123!,Test,User,tc001_phone20@example.com,11111111111111111111,,success,Changes saved
-TC-001-031,Mobile phone length 18 (recorder expects validation),tc001_mobile_18,ValidPass123!,Test,User,tc001_mobile18@example.com,,111111111111111111,validation,
-TC-001-045,Cancel user creation,tc001_cancel,ValidPass123!,Test,User,tc001_cancel@example.com,,,cancelled,
-```

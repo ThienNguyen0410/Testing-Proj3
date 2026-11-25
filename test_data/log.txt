@@ -1,0 +1,73 @@
+FAIL TC-001-001 - [ECP] Create user with valid required fields: Step 13 (verifyTextPresent ): Message: Expected page text was not found: Changes saved
+
+PASS TC-001-002 - [ECP] Username is empty: Executed 13 recorded steps
+PASS TC-001-003 - [ECP] Username contains uppercase letters: Executed 13 recorded steps
+PASS TC-001-004 - [ECP] Username contains whitespace: Executed 13 recorded steps
+PASS TC-001-005 - [ECP] Username contains unsupported special character: Executed 13 recorded steps
+PASS TC-001-006 - [ECP] Username uses allowed special characters: Executed 13 recorded steps
+FAIL TC-001-007 - [ECP] Duplicate username: Step 12 (verifyTextPresent ): Message: Expected page text was not found: This username already exists, choose another
+
+PASS TC-001-008 - [ECP] Password is empty with Manual accounts: Executed 13 recorded steps
+PASS TC-001-009 - [ECP] First name is empty: Executed 13 recorded steps
+PASS TC-001-010 - [ECP] Last name is empty: Executed 13 recorded steps
+PASS TC-001-011 - [ECP] Email is empty: Executed 13 recorded steps
+FAIL TC-001-012 - [ECP] Email with Gmail domain: Step 13 (verifyTextPresent ): Message: Expected page text was not found: Changes saved
+
+FAIL TC-001-013 - [ECP] Email with Outlook domain: Step 13 (verifyTextPresent ): Message: Expected page text was not found: Changes saved
+
+FAIL TC-001-014 - [ECP] Email with Yahoo domain: Step 13 (verifyTextPresent ): Message: Expected page text was not found: Changes saved
+
+PASS TC-001-015 - [ECP] Email has invalid format: Executed 13 recorded steps
+PASS TC-001-016 - [ECP] MoodleNet profile ID is empty: Executed 13 recorded steps
+PASS TC-001-017 - [ECP] Optional profile fields are empty: Executed 13 recorded steps
+PASS TC-001-018 - [ECP] Duplicate ID number: Executed 14 recorded steps
+PASS TC-001-019 - [ECP] Phone accepts letters and symbols: Executed 16 recorded steps
+PASS TC-001-020 - [ECP] Mobile phone accepts letters and symbols: Executed 16 recorded steps
+PASS TC-001-021 - [ECP] Interest tags multiple values: Executed 23 recorded steps
+PASS TC-001-022 - [BVA] Phone length 0 (empty): Executed 16 recorded steps
+PASS TC-001-023 - [BVA] Phone length 1: Executed 16 recorded steps
+PASS TC-001-024 - [BVA] Phone length 19: Executed 16 recorded steps
+PASS TC-001-025 - [BVA] Phone length 20: Executed 16 recorded steps
+PASS TC-001-026 - [BVA] Phone length 10: Executed 15 recorded steps
+PASS TC-001-027 - [BVA] Mobile phone length 0 (empty): Executed 16 recorded steps
+FAIL TC-001-028 - [BVA] Mobile phone length 1: Step 16 (verifyTextPresent ): Message: Expected page text was not found: User created successfully
+
+PASS TC-001-029 - [BVA] Mobile phone length 19: Executed 16 recorded steps
+PASS TC-001-030 - [BVA] Mobile phone length 20: Executed 16 recorded steps
+PASS TC-001-031 - [BVA] Mobile phone length 18: Executed 15 recorded steps
+PASS TC-001-032 - [Decision] Authentication method = Manual accounts: Executed 13 recorded steps
+FAIL TC-001-033 - [Decision] Authentication method = Email-based self-registration: Step 10 (verifyTextPresent ): Message: Expected page text was not found: Changes saved
+
+FAIL TC-001-034 - [Decision] Authentication method = No login: Step 10 (verifyTextPresent ): Message: Expected page text was not found: Changes saved
+
+PASS TC-001-035 - [Decision] Disabled authentication method is unavailable: Executed 4 recorded steps
+PASS TC-001-036 - [Decision] Generate password and notify user checked: Executed 11 recorded steps
+PASS TC-001-037 - [Decision] Force password change checked: Executed 14 recorded steps
+PASS TC-001-038 - [Decision] Suspended account checked: Executed 14 recorded steps
+PASS TC-001-039 - [Decision] Email visibility = Hidden: Executed 14 recorded steps
+PASS TC-001-040 - [Decision] Email visibility = Visible to everyone: Executed 14 recorded steps
+PASS TC-001-041 - [Decision] Email visibility = Visible to course participants: Executed 14 recorded steps
+PASS TC-001-042 - [Decision] Preferred language default English: Executed 14 recorded steps
+PASS TC-001-043 - [Use case] Create user with all required and optional data: Executed 31 recorded steps
+PASS TC-001-044 - [Use case] Create user with only required fields: Executed 13 recorded steps
+PASS TC-001-045 - [Use case] Cancel user creation: Executed 12 recorded steps
+FAIL TC-001-046 - [Use case] Verify suspended account cannot log in: Step 14 (verifyTextPresent ): Message: Expected page text was not found: User created successfully
+
+FAIL TC-001-047 - [Use case] Verify No login account cannot log in: Step 10 (verifyTextPresent ): Message: Expected page text was not found: Changes saved
+
+PASS TC-001-048 - [Use case] Verify force password change on first login: Executed 24 recorded steps
+PASS TC-001-049 - [Use case] Upload valid profile picture: Executed 20 recorded steps
+FAIL TC-001-050 - [Use case] Upload unsupported profile picture: Step 17 (verifyTextPresent ): Message: Expected page text was not found: No files attached
+
+FAIL TC-001-051 - [Use case] Upload more than one picture: Step 18 (click image_add): Message: 
+
+FAIL TC-001-052 - [Use case] Create user with all dropdown selections: Step 11 (select country): Message: Could not locate element with visible text: Vietnam; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+
+
+case 32,33 failed
+
+TC-001-046 - [Use case] Verify suspended account cannot log in ... ERROR
+TC-001-047 - [Use case] Verify No login account cannot log in ... ERROR
+TC-001-050 - [Use case] Upload unsupported profile picture ... ERROR
+TC-001-051 - [Use case] Upload more than one picture ... ERROR
+TC-001-052 - [Use case] Create user with all dropdown selections ... ERROR

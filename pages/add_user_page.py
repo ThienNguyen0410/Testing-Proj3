@@ -16,14 +16,26 @@ class AddUserPage:
         self.selectors = config["selectors"]
         self.urls = config["urls"]
 
+    @staticmethod
+    def _parse_locator(locator):
+        if locator.startswith("css="):
+            return By.CSS_SELECTOR, locator[4:]
+        if locator.startswith("xpath="):
+            return By.XPATH, locator[6:]
+        if locator.startswith("id="):
+            return By.ID, locator[3:]
+        if locator.startswith("id_"):
+            return By.ID, locator
+        return By.CSS_SELECTOR, locator
+
     def _wait_visible(self, selector):
         return WebDriverWait(self.driver, self.timeout).until(
-            EC.visibility_of_element_located((By.CSS_SELECTOR, selector))
+            EC.visibility_of_element_located(self._parse_locator(selector))
         )
 
     def _wait_clickable(self, selector):
         return WebDriverWait(self.driver, self.timeout).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, selector))
+            EC.element_to_be_clickable(self._parse_locator(selector))
         )
 
     def _click(self, selector):
@@ -76,9 +88,11 @@ class AddUserPage:
             ) from error
 
     def _type_and_wait(self, selector, value):
+        locator = self._parse_locator(selector)
+
         def populate_field(driver):
             try:
-                element = driver.find_element(By.CSS_SELECTOR, selector)
+                element = driver.find_element(*locator)
                 if not element.is_displayed():
                     return False
                 if element.get_attribute("value") == value:
@@ -96,10 +110,23 @@ class AddUserPage:
         )
 
     def login(self, base_url, username, password):
+        status, message = self.attempt_login(base_url, username, password)
+        if status == "error":
+            raise RuntimeError(
+                f"Moodle rejected the login: {message}. Check "
+                "MOODLE_USERNAME and MOODLE_PASSWORD."
+            )
+        if status != "success":
+            raise RuntimeError(f"Moodle login returned an unknown status: {status}")
+
+    def submit_login(self, base_url, username, password):
         self.driver.get(f"{base_url.rstrip('/')}{self.urls['login']}")
         self._type_and_wait(self.selectors["login_username"], username)
         self._type_and_wait(self.selectors["login_password"], password)
         self._click(self.selectors["login_button"])
+
+    def attempt_login(self, base_url, username, password):
+        self.submit_login(base_url, username, password)
         try:
             outcome = WebDriverWait(self.driver, self.timeout).until(
                 self._login_outcome
@@ -108,7 +135,7 @@ class AddUserPage:
             login_form_visible = any(
                 element.is_displayed()
                 for element in self.driver.find_elements(
-                    By.CSS_SELECTOR, self.selectors["login_username"]
+                    *self._parse_locator(self.selectors["login_username"])
                 )
             )
             raise RuntimeError(
@@ -120,17 +147,12 @@ class AddUserPage:
                 "Moodle credentials, base URL, and configured login selectors."
             ) from error
 
-        status, message = outcome
-        if status == "error":
-            raise RuntimeError(
-                f"Moodle rejected the login: {message}. Check "
-                "MOODLE_USERNAME and MOODLE_PASSWORD."
-            )
+        return outcome
 
     def _login_outcome(self, driver):
         error_selector = self.selectors.get("login_error")
         if error_selector:
-            for element in driver.find_elements(By.CSS_SELECTOR, error_selector):
+            for element in driver.find_elements(*self._parse_locator(error_selector)):
                 message = element.text.strip()
                 if element.is_displayed() and message:
                     return "error", message
@@ -138,11 +160,11 @@ class AddUserPage:
         login_form_visible = any(
             element.is_displayed()
             for element in driver.find_elements(
-                By.CSS_SELECTOR, self.selectors["login_username"]
+                *self._parse_locator(self.selectors["login_username"])
             )
         )
         for element in driver.find_elements(
-            By.CSS_SELECTOR, self.selectors["logged_in_marker"]
+            *self._parse_locator(self.selectors["logged_in_marker"])
         ):
             if element.is_displayed() and not login_form_visible:
                 return "success", ""
@@ -152,26 +174,144 @@ class AddUserPage:
         self.driver.get(f"{base_url.rstrip('/')}{self.urls['create_user']}")
         self._wait_visible(self.selectors["username"])
 
+    def restore_admin_session(self, base_url, username, password):
+        self.logout_current(base_url)
+        self.login(base_url, username, password)
+
+    def logout_current(self, base_url):
+        self.driver.get(
+            f"{base_url.rstrip('/')}{self.urls.get('logout', '/login/logout.php')}"
+        )
+        confirm_selector = self.selectors.get("logout_confirm")
+        if confirm_selector:
+            login_locator = self._parse_locator(self.selectors["login_username"])
+
+            def logout_state(driver):
+                if any(
+                    button.is_displayed()
+                    for button in driver.find_elements(
+                        *self._parse_locator(confirm_selector)
+                    )
+                ):
+                    return "confirm"
+                if any(
+                    field.is_displayed()
+                    for field in driver.find_elements(*login_locator)
+                ):
+                    return "logged_out"
+                return False
+
+            state = WebDriverWait(self.driver, self.timeout).until(logout_state)
+            if state == "confirm":
+                self._click(confirm_selector)
+
     def fill_form(self, data):
         self._replace_text(self.selectors["username"], data["username"])
 
         auth = Select(self._wait_visible(self.selectors["auth_method"]))
-        auth.select_by_visible_text(self.config["manual_auth_label"])
+        auth.select_by_visible_text(data["authentication"])
 
-        self._click(self.selectors["password_toggle"])
-        if data["password"]:
+        if data["authentication"]:
+            self._click(self.selectors["password_toggle"])
             self._replace_text(self.selectors["new_password"], data["password"])
 
         for field in ("firstname", "lastname", "email"):
             self._replace_text(self.selectors[field], data[field])
 
-        if data["phone"] or data["mobile_phone"]:
+        for field in ("city", "moodlenet_profile"):
+            if data[field]:
+                self._replace_text(self.selectors[field], data[field])
+
+        if any(data[field] for field in (
+            "firstname_phonetic",
+            "lastname_phonetic",
+            "middle_name",
+            "alternate_name",
+        )):
+            self._click(self.selectors["names_section_toggle"])
+            self._wait_visible(self.selectors["names_section_open"])
+            for field in (
+                "firstname_phonetic",
+                "lastname_phonetic",
+                "middle_name",
+                "alternate_name",
+            ):
+                if data[field]:
+                    self._replace_text(self.selectors[field], data[field])
+
+        if any(
+            data[field]
+            for field in (
+                "id_number",
+                "institution",
+                "department",
+                "phone",
+                "mobile_phone",
+                "address",
+            )
+        ):
             self._click(self.selectors["optional_section_toggle"])
             self._wait_visible(self.selectors["optional_section_open"])
-            if data["phone"]:
-                self._replace_text(self.selectors["phone"], data["phone"])
-            if data["mobile_phone"]:
-                self._replace_text(self.selectors["mobile_phone"], data["mobile_phone"])
+            for field in (
+                "id_number",
+                "institution",
+                "department",
+                "phone",
+                "mobile_phone",
+                "address",
+            ):
+                if data[field]:
+                    self._replace_text(self.selectors[field], data[field])
+
+        for field in ("country", "timezone", "email_visibility"):
+            if data[field]:
+                select = Select(self._wait_visible(self.selectors[field]))
+                value = data[field]
+                if value.startswith("label="):
+                    value = value[len("label="):]
+                select.select_by_visible_text(value)
+
+        if data["interests"]:
+            self._click(self.selectors["interests_section_toggle"])
+            self._wait_visible(self.selectors["interests_section_open"])
+            from selenium.webdriver.common.keys import Keys
+
+            for interest in data["interests"].split("|"):
+                if interest:
+                    input_element = self._wait_visible(
+                        self.selectors["interests_input"]
+                    )
+                    input_element.send_keys(interest)
+                    input_element.send_keys(Keys.ENTER)
+
+        for field, selector_key in (
+            ("create_password", "create_password"),
+            ("force_password_change", "force_password_change"),
+            ("suspended", "suspended"),
+        ):
+            if data[field]:
+                expected = data[field].strip().lower() in {"1", "true", "yes"}
+                checkbox = self._wait_visible(self.selectors[selector_key])
+                if checkbox.is_selected() != expected:
+                    self._click(self.selectors[selector_key])
+
+    def upload_profile_picture(self, file_path):
+        from pathlib import Path
+
+        self._click(self.selectors["image_add"])
+        self._click(self.selectors["upload_file_menu"])
+        file_input = WebDriverWait(self.driver, self.timeout).until(
+            EC.presence_of_element_located(
+                self._parse_locator(self.selectors["profile_upload_input"])
+            )
+        )
+        path = Path(file_path)
+        if not path.is_absolute():
+            path = Path(__file__).resolve().parents[1] / path
+        if not path.is_file():
+            raise FileNotFoundError(f"Upload file does not exist: {path}")
+        file_input.send_keys(str(path.resolve()))
+        self._click(self.selectors["upload_button"])
 
     def submit(self):
         self._click(self.selectors["submit_button"])
@@ -180,7 +320,4 @@ class AddUserPage:
         self._click(self.selectors["cancel_button"])
 
     def _replace_text(self, selector, value):
-        element = self._wait_visible(selector)
-        element.clear()
-        if value:
-            element.send_keys(value)
+        self._type_and_wait(selector, value)
